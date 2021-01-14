@@ -26,7 +26,6 @@ export default class extends React.Component {
       const {
         coords: { latitude, longitude }
       } = await Location.getCurrentPositionAsync();
-      console.log(latitude, longitude);
       this.getWhether(latitude, longitude);
       this.setState({ isLoading: false });
     } catch (error) {
