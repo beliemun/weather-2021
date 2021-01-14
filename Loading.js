@@ -1,0 +1,27 @@
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
+
+const Loading = () => {
+    return (
+        <View style={styles.viewContianer}>
+            <Text style={styles.text}>Getting the whether..</Text>
+        </View>
+    )
+}
+
+export default Loading;
+
+const styles = StyleSheet.create({
+    viewContianer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        backgroundColor: '#f1c40f',
+        paddingLeft: 50,
+        paddingBottom: 100,
+    },
+    text: {
+        color: '#2c2c2c',
+        fontSize: 24,
+        fontWeight: 'bold'
+    }
+})
