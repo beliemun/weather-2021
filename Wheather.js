@@ -1,72 +1,49 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const getColorAndText = (condition) => {
-    let colors, text;
-
-
-    switch (condition) {
-        case 'Clear':
-            colors = ['#48dbfb', '#2980b9'];
-            text = 'Clear :) Have a nice day!'
-            break;
-        case 'Rain':
-            colors = ['#4c669f', '#3b5998', '#192f6a'];
-            text = 'Don`t forget take your umbrella!'
-            break;
-        case 'Thunderstorm':
-            colors = ['#ff9ff3', '#f368e0']
-            text = 'Be careful your head!'
-            break;
-        case 'Snow':
-            colors = ['#c8d6e5', '#8395a7']
-            text = 'Do you want to build a snow man~'
-            break;
-        case 'Clouds':
-            colors = ['#95a5a6', '#606060']
-            text = 'Next day will be better :)'
-            break;
-        default:
-            colors = ['#48dbfb', '#2980b9'];
-            text = 'Take care!'
-    }
-
-    return { colors, text };
-}
-
-const WeatherIcon = ({ condition }) => {
-    console.log(condition);
-    switch (condition) {
-        case 'Clear':
-            return <Ionicons name="ios-sunny-sharp" size={100} color="white" />
-        case 'Rain':
-            return <Ionicons name="rainy" size={100} color="white" />
-        case 'Thunderstorm':
-            return <Ionicons name="thunderstorm" size={100} color="white" />
-        case 'Snow':
-            return <Ionicons name="ios-snow" size={100} color="white" />
-        case 'Clouds':
-            return <Ionicons name="cloud" size={100} color="white" />
-        default:
-            return <Ionicons name="question" size={100} color="white" />
+const WeatherOption = {
+    Clear: {
+        gradient: ['#48dbfb', '#2980b9'],
+        icon: 'ios-sunny-sharp',
+        message: 'Clear :) Have a nice day!'
+    },
+    Rain: {
+        gradient: ['#4c669f', '#3b5998', '#192f6a'],
+        icon: 'rainy',
+        message: 'Don`t forget take your umbrella!'
+    },
+    Thunderstorm: {
+        gradient: ['#ff9ff3', '#f368e0'],
+        icon: 'thunderstorm',
+        message: 'Be careful your head!'
+    },
+    Snow: {
+        gradient: ['#c8d6e5', '#8395a7'],
+        icon: 'ios-snow',
+        message: 'Do you want to build a snow man~'
+    },
+    Clouds: {
+        gradient: ['#95a5a6', '#606060'],
+        icon: 'cloud',
+        message: 'Next day will be better :)'
     }
 }
 
 const Weather = ({ temp, condition }) => {
-    const { colors, text } = getColorAndText(condition);
     return (
         <LinearGradient
-            colors={colors}
+            colors={WeatherOption[condition].gradient}
             style={styles.viewContainer}>
+            <StatusBar barStyle={'light-content'} />
             <View style={styles.headerContainer}>
-                <WeatherIcon condition={condition} />
+                <Ionicons name={WeatherOption[condition].icon} size={100} color='white' />
                 <Text style={styles.headerText}>{Math.round(temp)} ℃</Text>
             </View>
             <View style={styles.footerContainter}>
-                <Text style={styles.footerText}>{text}</Text>
+                <Text style={styles.footerText}>{WeatherOption[condition].message}</Text>
             </View>
         </LinearGradient>
     )

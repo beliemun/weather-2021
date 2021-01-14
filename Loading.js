@@ -14,14 +14,12 @@ export default Loading;
 const styles = StyleSheet.create({
     viewContianer: {
         flex: 1,
-        justifyContent: 'flex-end',
-        backgroundColor: '#f1c40f',
-        paddingLeft: 50,
-        paddingBottom: 100,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     text: {
         color: '#2c2c2c',
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold'
     }
 })
