@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import Loading from './Loading';
+import Weather from './Wheather';
 import * as Location from 'expo-location';
 import axios from 'axios';
 
@@ -13,8 +14,13 @@ export default class extends React.Component {
 
   getWhether = async (latitude, longitude) => {
     try {
-      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
-      console.log(data);
+      const {
+        data: {
+          main: { temp },
+          weather
+        },
+      } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
+      this.setState({ isLoading: false, temp, condition: weather[0].main });
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +33,6 @@ export default class extends React.Component {
         coords: { latitude, longitude }
       } = await Location.getCurrentPositionAsync();
       this.getWhether(latitude, longitude);
-      this.setState({ isLoading: false });
     } catch (error) {
       Alert.alert("Can`t check your location.", "You need to allow your location permission");
     }
@@ -38,7 +43,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.state;
-    return isLoading ? <Loading /> : null;
+    const { isLoading, temp, condition } = this.state;
+    return isLoading ? <Loading /> : <Weather temp={temp} condition={condition} />;
   }
 }
