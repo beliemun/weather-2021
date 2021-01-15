@@ -29,6 +29,11 @@ const WeatherOption = {
         gradient: ['#95a5a6', '#606060'],
         icon: 'cloud',
         message: 'Next day will be better :)'
+    },
+    Fog: {
+        gradient: ['#95a5a6', '#606060'],
+        icon: 'Fog',
+        message: 'I don`t like Fog!'
     }
 }
 
